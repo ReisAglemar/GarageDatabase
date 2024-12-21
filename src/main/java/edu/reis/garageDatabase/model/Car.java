@@ -10,20 +10,14 @@ import lombok.Setter;
 public class Car extends Vehicle {
 
     private int occupants;
-    private float price;
 
     public Car() {
     }
 
-    public Car(String brand, String name, String model, String color, String numberPistons, int year,
-               int occupants, float price) throws ExceptionRegister {
-        super(brand, name, model, color, numberPistons, year);
-
-        if (price == 0.0f) {
-            throw new ExceptionRegister("Veiculo não pode ser registrado com preço zerado!");
-        }
+    public Car(String brand, String name, String model, String color, int year, float price, String numberPistons,
+               int occupants) throws ExceptionRegister {
+        super(brand, name, model, color, year, price, numberPistons);
         this.occupants = occupants;
-        this.price = price;
     }
 
     public void details() {
@@ -36,7 +30,7 @@ public class Car extends Vehicle {
                             ID: %d
                             Data de inclusão: %s
                         
-                        """.formatted(occupants, super.getNumberPistonpistons(), price, super.getId(), super.getDateRegistration());
+                        """.formatted(occupants, super.getNumberPistonpistons(), super.getPrice(), super.getId(), super.getDateRegistration());
         System.out.println(string);
     }
 }

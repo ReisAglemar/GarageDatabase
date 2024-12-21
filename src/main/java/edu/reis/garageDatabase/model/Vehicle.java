@@ -17,14 +17,15 @@ public abstract class Vehicle {
     private String name;
     private String model;
     private String color;
-    private NumberPiston numberPistonpistons;
     private int year;
+    private float price;
+    private NumberPiston numberPistonpistons;
     private LocalDate dateRegistration;
 
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String name, String model, String color, String numberPistons,int year) throws ExceptionRegister {
+    public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons) throws ExceptionRegister {
 
         this.numberPistonpistons = NumberPiston.fromDescription(numberPistons);
 
@@ -32,11 +33,16 @@ public abstract class Vehicle {
         if (year > actualYear || year < 2000) {
             throw new ExceptionRegister("O ano do veículo não pode ser superior ao atual ou inferior a 2000");
         }
+        if (price == 0.0f){
+            throw new ExceptionRegister("O valor do veículo não pode ser zero!");
+        }
+
         this.brand = brand;
         this.name = name;
         this.model = model;
         this.color = color;
         this.year = year;
+        this.price = price;
         this.dateRegistration = LocalDate.now();
     }
 
