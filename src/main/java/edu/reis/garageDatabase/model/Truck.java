@@ -7,30 +7,29 @@ import lombok.Setter;
 @Setter
 @Getter
 
-public class Car extends Vehicle {
+public class Truck extends Vehicle {
 
-    private int occupants;
+    private int loadCapacity;
 
-    public Car() {
-    }
+    public Truck(){}
 
-    public Car(String brand, String name, String model, String color, int year, float price, String numberPistons,
-               int occupants) throws ExceptionRegister {
+    public Truck(String brand, String name, String model, String color, int year, float price, String numberPistons,
+                 int loadCapacity) throws ExceptionRegister {
         super(brand, name, model, color, year, price, numberPistons);
-        this.occupants = occupants;
+        this.loadCapacity = loadCapacity;
     }
 
     public void details() {
         String string = super.toString()+
                 """
-                            Ocupantes: %d
+                            Capacidade de carga : %d kg
                             Numero de pistões: %s
                             Price: R$ %.2f
                             --------------------------------
                             ID: %d
                             Data de inclusão: %s
                         
-                        """.formatted(occupants, super.getNumberPistonpistons(), super.getPrice(), super.getId(), super.getDateRegistration());
+                        """.formatted(loadCapacity, super.getNumberPistonpistons(), super.getPrice(), super.getId(), super.getDateRegistration());
         System.out.println(string);
     }
 }
