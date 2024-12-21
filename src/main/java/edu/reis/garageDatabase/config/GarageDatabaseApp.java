@@ -3,6 +3,7 @@ package edu.reis.garageDatabase.config;
 
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
 import edu.reis.garageDatabase.model.Car;
+import edu.reis.garageDatabase.model.Motorcycle;
 import edu.reis.garageDatabase.model.Truck;
 
 public class GarageDatabaseApp {
@@ -15,6 +16,9 @@ public class GarageDatabaseApp {
 
         Truck truck =new Truck("Scania", "R500", "ATV2", "Cinza", 2022, 250000.00f, "8", 23000);
         truck.details();
+
+        Motorcycle motorcycle = new Motorcycle("Suzuki", "Srad", "sr1000", "Verde", 2023, 50000.00f, "4", 1000);
+        motorcycle.details();
 
     }
 }
