@@ -29,8 +29,10 @@ public class Car extends Vehicle {
                             --------------------------------
                             ID: %d
                             Data de inclusão: %s
+                            Descrição: %s
                         
-                        """.formatted(occupants, super.getNumberPistonpistons(), super.getPrice(), super.getId(), super.getDateRegistration());
+                        """.formatted(occupants, super.getNumberPistonpistons(), super.getPrice(), super.getId(),
+                        super.getDateRegistration(), super.getDescription());
         System.out.println(string);
     }
 }

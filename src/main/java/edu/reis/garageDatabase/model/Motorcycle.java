@@ -22,8 +22,10 @@ public class Motorcycle extends Vehicle {
                             --------------------------------
                             ID: %d
                             Data de inclusão: %s
+                            Descrição: %s
                         
-                        """.formatted(cylinderCapacity, super.getNumberPistonpistons(), super.getPrice(), super.getId(), super.getDateRegistration());
+                        """.formatted(cylinderCapacity, super.getNumberPistonpistons(), super.getPrice(),
+                        super.getId(), super.getDateRegistration(), super.getDescription());
         System.out.println(string);
     }
 
