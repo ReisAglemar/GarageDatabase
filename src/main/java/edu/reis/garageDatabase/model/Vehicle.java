@@ -1,6 +1,7 @@
 package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
+import edu.reis.garageDatabase.service.Gemini;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,6 +22,8 @@ public abstract class Vehicle {
     private float price;
     private NumberPiston numberPistonpistons;
     private LocalDate dateRegistration;
+    private String description;
+
 
     public Vehicle() {
     }
@@ -44,6 +47,7 @@ public abstract class Vehicle {
         this.year = year;
         this.price = price;
         this.dateRegistration = LocalDate.now();
+        setDescription(new Gemini().getInfo(brand, name, model, year));
     }
 
     @Override
