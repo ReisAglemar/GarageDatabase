@@ -1,8 +1,11 @@
 package edu.reis.garageDatabase.model;
 
+import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.IOException;
 
 @Setter
 @Getter
@@ -14,7 +17,7 @@ public class Truck extends Vehicle {
     public Truck(){}
 
     public Truck(String brand, String name, String model, String color, int year, float price, String numberPistons,
-                 int loadCapacity) throws ExceptionRegister {
+                 int loadCapacity) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
         super(brand, name, model, color, year, price, numberPistons);
         this.loadCapacity = loadCapacity;
     }

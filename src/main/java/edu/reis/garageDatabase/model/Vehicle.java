@@ -1,10 +1,12 @@
 package edu.reis.garageDatabase.model;
 
+import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
 import edu.reis.garageDatabase.service.Gemini;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Setter
@@ -23,12 +25,14 @@ public abstract class Vehicle {
     private NumberPiston numberPistonpistons;
     private LocalDate dateRegistration;
     private String description;
+    private Gemini gemini = new Gemini();
 
 
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons) throws ExceptionRegister {
+    public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons)
+            throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
 
         this.numberPistonpistons = NumberPiston.fromDescription(numberPistons);
 
@@ -47,7 +51,7 @@ public abstract class Vehicle {
         this.year = year;
         this.price = price;
         this.dateRegistration = LocalDate.now();
-        setDescription(new Gemini().getInfo(brand, name, model, year));
+        setDescription(gemini.getInfoVehicle(brand, name, model, year));
     }
 
     @Override

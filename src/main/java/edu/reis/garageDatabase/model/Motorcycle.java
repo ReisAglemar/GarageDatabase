@@ -1,6 +1,9 @@
 package edu.reis.garageDatabase.model;
 
+import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
+
+import java.io.IOException;
 
 public class Motorcycle extends Vehicle {
     private int cylinderCapacity;
@@ -8,7 +11,7 @@ public class Motorcycle extends Vehicle {
     public Motorcycle() {}
 
     public Motorcycle(String brand, String name, String model, String color, int year, float price, String numberPistons,
-                      int cylinderCapacity) throws ExceptionRegister {
+                      int cylinderCapacity) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
         super(brand, name, model, color, year, price, numberPistons);
         this.cylinderCapacity = cylinderCapacity;
     }
