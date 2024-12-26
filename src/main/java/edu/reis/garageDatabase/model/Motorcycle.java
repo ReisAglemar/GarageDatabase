@@ -2,10 +2,21 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.IOException;
 
+@Setter
+@Getter
+@Entity
+@Table(name = "GDB_MOTORCYCLE")
 public class Motorcycle extends Vehicle {
+
+    @ManyToOne
+    private Manufacturer manufacturer;
+
     private int cylinderCapacity;
 
     public Motorcycle() {}
@@ -27,7 +38,7 @@ public class Motorcycle extends Vehicle {
                             Data de inclusão: %s
                             Descrição: %s
                         
-                        """.formatted(cylinderCapacity, super.getNumberPistonpistons(), super.getPrice(),
+                        """.formatted(cylinderCapacity, super.getNumberPistons(), super.getPrice(),
                         super.getId(), super.getDateRegistration(), super.getDescription());
         System.out.println(string);
     }

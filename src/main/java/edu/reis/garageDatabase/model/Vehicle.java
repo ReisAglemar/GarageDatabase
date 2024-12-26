@@ -3,6 +3,7 @@ package edu.reis.garageDatabase.model;
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
 import edu.reis.garageDatabase.service.Gemini;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,20 +12,27 @@ import java.time.LocalDate;
 
 @Setter
 @Getter
-
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "GDB_VEHICLE")
 
 public abstract class Vehicle {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String brand;
     private String name;
     private String model;
     private String color;
     private int year;
     private float price;
-    private NumberPiston numberPistonpistons;
+    private NumberPiston numberPistons;
     private LocalDate dateRegistration;
     private String description;
+
+    @Transient
     private Gemini gemini = new Gemini();
 
 
@@ -34,7 +42,7 @@ public abstract class Vehicle {
     public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons)
             throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
 
-        this.numberPistonpistons = NumberPiston.fromDescription(numberPistons);
+        this.numberPistons = NumberPiston.fromDescription(numberPistons);
 
         int actualYear = LocalDate.now().getYear();
         if (year > actualYear || year < 2000) {
