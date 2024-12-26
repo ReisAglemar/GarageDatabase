@@ -6,4 +6,6 @@ import java.io.IOException;
 
 public interface Igemini {
     String getInfoVehicle(String brand, String name, String model, int year) throws ExceptionGemini, IOException, InterruptedException;
+
+    String getInfoManufacturer(String name) throws ExceptionGemini, IOException, InterruptedException;
 }

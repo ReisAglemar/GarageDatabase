@@ -2,6 +2,7 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.service.Gemini;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,16 +10,30 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
+@Entity
+@Table(name = "GDB_MANUFACTURER")
 
 public class Manufacturer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
+
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Car> cars = new ArrayList<>();
+
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Motorcycle> motorcycles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Truck> trucks = new ArrayList<>();
+
+    @Transient
     private Gemini gemini = new Gemini();
 
     public Manufacturer() {}

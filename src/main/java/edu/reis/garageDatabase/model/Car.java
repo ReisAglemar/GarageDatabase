@@ -2,6 +2,7 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +10,13 @@ import java.io.IOException;
 
 @Setter
 @Getter
+@Entity
+@Table(name = "GDB_CAR")
 
 public class Car extends Vehicle {
+
+    @ManyToOne
+    private Manufacturer manufacturer;
 
     private int occupants;
 
@@ -34,8 +40,9 @@ public class Car extends Vehicle {
                             Data de inclusão: %s
                             Descrição: %s
                         
-                        """.formatted(occupants, super.getNumberPistonpistons(), super.getPrice(), super.getId(),
+                        """.formatted(occupants, super.getNumberPistons(), super.getPrice(), super.getId(),
                         super.getDateRegistration(), super.getDescription());
         System.out.println(string);
     }
 }
+
