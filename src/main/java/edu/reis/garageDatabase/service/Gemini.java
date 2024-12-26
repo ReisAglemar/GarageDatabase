@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 public class Gemini implements Igemini {
 
     private String geminiKey = System.getenv("GARAGE_DATABASE_KEY_GEMINI");
-    private String link ="https://generativelanguage.googleapis.com/v1beta/models/" +
+    private String link = "https://generativelanguage.googleapis.com/v1beta/models/" +
             "gemini-1.5-flash:generateContent?key=" + geminiKey;
     Gson gson = new Gson();
 
@@ -35,6 +35,7 @@ public class Gemini implements Igemini {
         return getSearch(jsonBody);
     }
 
+    @Override
     public String getInfoManufacturer(String name) throws ExceptionGemini, IOException, InterruptedException {
         String jsonBody = """
                 {
@@ -49,20 +50,20 @@ public class Gemini implements Igemini {
         return getSearch(jsonBody);
     }
 
-
+    //funcao auxiliar
     private String getSearch(String jsonBody) throws ExceptionGemini, IOException, InterruptedException {
-            HttpClient client = HttpClient.newHttpClient();
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(link))
-                    .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
-                    .build();
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(link))
+                .POST(HttpRequest.BodyPublishers.ofString(jsonBody))
+                .build();
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
-            if (response.statusCode() != 200) {
-                throw new ExceptionGemini("Erro ao consumir Gemini, Verifique sua conexão de dados!");
-            }
-            RecordGemini record = gson.fromJson(response.body(), RecordGemini.class);
-            return record.getText();
+        if (response.statusCode() != 200) {
+            throw new ExceptionGemini("Erro ao consumir Gemini, Verifique sua conexão de dados!");
+        }
+        RecordGemini record = gson.fromJson(response.body(), RecordGemini.class);
+        return record.getText();
 
     }
 }
