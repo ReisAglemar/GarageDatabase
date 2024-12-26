@@ -9,8 +9,11 @@ import edu.reis.garageDatabase.model.Motorcycle;
 import edu.reis.garageDatabase.model.Truck;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 public class GarageDatabaseApp {
+
+    Scanner in = new Scanner(System.in);
 
     public void init() throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
         System.out.println("Initializing Garage Database");
@@ -29,5 +32,7 @@ public class GarageDatabaseApp {
 
         Manufacturer manufacturer = new Manufacturer("Honda");
         System.out.println(manufacturer.toString());
+
+        String pause = in.nextLine();
     }
 }
