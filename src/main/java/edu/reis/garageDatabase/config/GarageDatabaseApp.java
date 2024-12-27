@@ -22,7 +22,7 @@ public class GarageDatabaseApp {
                 12500.54f, "4", 5);
         car.details();
 
-        Truck truck =new Truck("Scania", "R500", "ATV2", "Cinza",
+        Truck truck = new Truck("Scania", "R500", "ATV2", "Cinza",
                 2022, 250000.00f, "8", 23000);
         truck.details();
 
