@@ -2,16 +2,20 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
-import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
-@Table(name = "GDB_CAR")
+@DiscriminatorValue("CAR")
 
 public class Car extends Vehicle {
 
@@ -20,9 +24,6 @@ public class Car extends Vehicle {
 
     private int occupants;
 
-    public Car() {
-    }
-
     public Car(String brand, String name, String model, String color, int year, float price, String numberPistons,
                int occupants) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
         super(brand, name, model, color, year, price, numberPistons);
@@ -30,7 +31,7 @@ public class Car extends Vehicle {
     }
 
     public void details() {
-        String string = super.toString()+
+        String string = super.toString() +
                 """
                             Ocupantes: %d
                             Numero de pistões: %s

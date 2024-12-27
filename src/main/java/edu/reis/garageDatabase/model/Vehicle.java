@@ -13,7 +13,8 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Entity
-@Inheritance(strategy = InheritanceType.JOINED)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "vehicle_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "GDB_VEHICLE")
 
 public abstract class Vehicle {
@@ -48,7 +49,7 @@ public abstract class Vehicle {
         if (year > actualYear || year < 2000) {
             throw new ExceptionRegister("O ano do veículo não pode ser superior ao atual ou inferior a 2000");
         }
-        if (price == 0.0f){
+        if (price == 0.0f) {
             throw new ExceptionRegister("O valor do veículo não pode ser zero!");
         }
 

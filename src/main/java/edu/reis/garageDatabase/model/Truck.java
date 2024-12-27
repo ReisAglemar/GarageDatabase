@@ -2,24 +2,27 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
-import jakarta.persistence.*;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
-@Table(name = "GDB_TRUCK")
+@DiscriminatorValue("TRUCK")
+
 public class Truck extends Vehicle {
 
     @ManyToOne
     private Manufacturer manufacturer;
 
     private int loadCapacity;
-
-    public Truck(){}
 
     public Truck(String brand, String name, String model, String color, int year, float price, String numberPistons,
                  int loadCapacity) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
@@ -28,7 +31,7 @@ public class Truck extends Vehicle {
     }
 
     public void details() {
-        String string = super.toString()+
+        String string = super.toString() +
                 """
                             Capacidade de carga : %d kg
                             Numero de pistões: %s

@@ -12,7 +12,8 @@ public enum NumberPiston {
     SEIS_PISTOES("6"),
     OITO_PISTOES("8"),
     DEZ_PISTOES("10"),
-    ELETRICO("electric"),;
+    ELETRICO("electric"),
+    ;
 
     private String description;
 
