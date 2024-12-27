@@ -2,9 +2,9 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
-import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +15,7 @@ import java.io.IOException;
 @Getter
 @NoArgsConstructor
 @Entity
-@DiscriminatorValue("CAR")
+@Table(name = "GDB_CAR")
 
 public class Car extends Vehicle {
 
