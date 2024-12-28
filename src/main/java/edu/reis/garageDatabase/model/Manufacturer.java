@@ -54,4 +54,19 @@ public class Manufacturer {
                 """.formatted(name, description);
         return string;
     }
+
+    public void setCars(List<Car> cars) {
+        cars.forEach(car -> car.setManufacturer(this));
+        this.cars = cars;
+    }
+
+    public void setMotorcycles(List<Motorcycle> motorcycles) {
+        motorcycles.forEach(motorcycle -> motorcycle.setManufacturer(this));
+        this.motorcycles = motorcycles;
+    }
+
+    public void setTrucks(List<Truck> trucks) {
+        trucks.forEach(truck -> truck.setManufacturer(this));
+        this.trucks = trucks;
+    }
 }

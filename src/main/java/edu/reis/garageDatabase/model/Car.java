@@ -3,7 +3,6 @@ package edu.reis.garageDatabase.model;
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,14 +18,11 @@ import java.io.IOException;
 
 public class Car extends Vehicle {
 
-    @ManyToOne
-    private Manufacturer manufacturer;
-
     private int occupants;
 
     public Car(String brand, String name, String model, String color, int year, float price, String numberPistons,
-               int occupants) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
-        super(brand, name, model, color, year, price, numberPistons);
+               int occupants, Manufacturer manufacturer) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
+        super(brand, name, model, color, year, price, numberPistons, manufacturer);
         this.occupants = occupants;
     }
 

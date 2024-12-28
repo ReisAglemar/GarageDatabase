@@ -32,6 +32,9 @@ public abstract class Vehicle {
     private LocalDate dateRegistration;
     private String description;
 
+    @ManyToOne
+    private Manufacturer manufacturer;
+
     @Transient
     private Gemini gemini = new Gemini();
 
@@ -39,14 +42,15 @@ public abstract class Vehicle {
     public Vehicle() {
     }
 
-    public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons)
+    public Vehicle(String brand, String name, String model, String color, int year, float price, String numberPistons, Manufacturer manufacturer)
             throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
 
         this.numberPistons = NumberPiston.fromDescription(numberPistons);
+        this.manufacturer = manufacturer;
 
         int actualYear = LocalDate.now().getYear();
         if (year > actualYear || year < 2000) {
-            throw new ExceptionRegister("O ano do veículo não pode ser superior ao atual ou inferior a 2000");
+            throw new ExceptionRegister("ERRO: O ano do veículo não pode ser superior ao atual ou inferior a 2000");
         }
         if (price == 0.0f) {
             throw new ExceptionRegister("O valor do veículo não pode ser zero!");
