@@ -2,35 +2,32 @@ package edu.reis.garageDatabase.model;
 
 import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.erro.register.ExceptionRegister;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "GDB_CAR")
 
 public class Car extends Vehicle {
 
-    @ManyToOne
-    private Manufacturer manufacturer;
-
     private int occupants;
 
-    public Car() {
-    }
-
     public Car(String brand, String name, String model, String color, int year, float price, String numberPistons,
-               int occupants) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
-        super(brand, name, model, color, year, price, numberPistons);
+               int occupants, Manufacturer manufacturer) throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
+        super(brand, name, model, color, year, price, numberPistons, manufacturer);
         this.occupants = occupants;
     }
 
     public void details() {
-        String string = super.toString()+
+        String string = super.toString() +
                 """
                             Ocupantes: %d
                             Numero de pistões: %s

@@ -60,7 +60,7 @@ public class Gemini implements Igemini {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if (response.statusCode() != 200) {
-            throw new ExceptionGemini("Erro ao consumir Gemini, Verifique sua conexão de dados!");
+            throw new ExceptionGemini("Erro ao consumir Gemini, Verifique sua conexão de dados! Status: " + response.statusCode());
         }
         RecordGemini record = gson.fromJson(response.body(), RecordGemini.class);
         return record.getText();

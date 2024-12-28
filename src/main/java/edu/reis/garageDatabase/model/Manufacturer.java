@@ -4,6 +4,7 @@ import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
 import edu.reis.garageDatabase.service.Gemini;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.IOException;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "GDB_MANUFACTURER")
 
@@ -21,7 +23,9 @@ public class Manufacturer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, nullable = false)
     private String name;
+
     private String description;
 
     @OneToMany(mappedBy = "manufacturer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
@@ -36,8 +40,6 @@ public class Manufacturer {
     @Transient
     private Gemini gemini = new Gemini();
 
-    public Manufacturer() {}
-
     public Manufacturer(String name) throws ExceptionGemini, IOException, InterruptedException {
         this.name = name;
         this.description = gemini.getInfoManufacturer(name);
@@ -51,5 +53,20 @@ public class Manufacturer {
                     Descrição: %s
                 """.formatted(name, description);
         return string;
+    }
+
+    public void setCars(List<Car> cars) {
+        cars.forEach(car -> car.setManufacturer(this));
+        this.cars = cars;
+    }
+
+    public void setMotorcycles(List<Motorcycle> motorcycles) {
+        motorcycles.forEach(motorcycle -> motorcycle.setManufacturer(this));
+        this.motorcycles = motorcycles;
+    }
+
+    public void setTrucks(List<Truck> trucks) {
+        trucks.forEach(truck -> truck.setManufacturer(this));
+        this.trucks = trucks;
     }
 }
