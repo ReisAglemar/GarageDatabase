@@ -1,13 +1,15 @@
-package edu.reis.garageDatabase.config;
+package edu.reis.garageDatabase.app;
 
-import edu.reis.garageDatabase.erro.gemini.ExceptionGemini;
-import edu.reis.garageDatabase.erro.register.ExceptionRegister;
+import edu.reis.garageDatabase.model.Car;
+import edu.reis.garageDatabase.model.Motorcycle;
+import edu.reis.garageDatabase.model.Truck;
 import edu.reis.garageDatabase.repository.ManufacturerRepository;
 import edu.reis.garageDatabase.repository.VehicleRepository;
+import edu.reis.garageDatabase.service.InsertDB;
+import edu.reis.garageDatabase.service.SearchDB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 @Component
@@ -26,36 +28,17 @@ public class GarageDatabaseApp {
     private InsertDB insertDB;
 
     @Autowired
+    private SearchDB searchDB;
+
+    @Autowired
     public GarageDatabaseApp(ManufacturerRepository manufacturerRepository, VehicleRepository vehicleRepository) {
         this.vehicleRepository = vehicleRepository;
         this.manufacturerRepository = manufacturerRepository;
     }
 
-    public void init() throws ExceptionRegister, ExceptionGemini, IOException, InterruptedException {
-
+    public void init() {
         logo("Bem vindo ao Garage Database!");
         mainMenu();
-
-//        Car car = new Car("Honda", "Civic", "LX", "Azul", 2002,
-//                12500.54f, "4", 5);
-//        car.details();
-//        vehicleRepository.save(car);
-//
-//        Truck truck = new Truck("Scania", "R500", "ATV2", "Cinza",
-//                2022, 250000.00f, "8", 23000);
-//        truck.details();
-//        vehicleRepository.save(truck);
-//
-//        Motorcycle motorcycle = new Motorcycle("Suzuki", "Srad", "sr1000", "Verde",
-//                2023, 50000.00f, "4", 1000);
-//        motorcycle.details();
-//        vehicleRepository.save(motorcycle);
-//
-//        Manufacturer manufacturer = new Manufacturer("Honda");
-//        System.out.println(manufacturer.toString());
-//        manufacturerRepository.save(manufacturer);
-//
-//        String pause = in.nextLine();
     }
 
     private void logo(String mensage) {
@@ -75,7 +58,7 @@ public class GarageDatabaseApp {
         System.out.println(logo);
     }
 
-    private void mainMenu() throws ExceptionGemini, IOException, InterruptedException {
+    private void mainMenu() {
         while (true) {
             String mainMenu = """
                     
@@ -103,12 +86,12 @@ public class GarageDatabaseApp {
                         break;
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Para navegar no menu insira o número correspondente");
+                System.out.println("Erro: Use valores numéricos para navegar!");
             }
         }
     }
 
-    private void insertMenu() throws ExceptionGemini, IOException, InterruptedException {
+    private void insertMenu() {
         while (true) {
             String menu = """
                     
@@ -128,7 +111,6 @@ public class GarageDatabaseApp {
                     case 0:
                         return;
                     case 1:
-                        System.out.println(this.manufacturerRepository);
                         insertDB.insertManufacturer();
                         return;
                     case 2:
@@ -146,12 +128,54 @@ public class GarageDatabaseApp {
                         System.out.println("Opção inválida!");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Para navegar no menu insira o número correspondente");
+                System.out.println("Erro: Use valores numéricos para navegar!");
             }
         }
     }
 
     private void searchMenu() {
-    }
+        while (true) {
+            String menu = """
+                    
+                        1- Listar Montadoras
+                        2- Listar Carros
+                        3- Listar Caminhões
+                        4- Listar Motocicletas
+                        5- Listar Todos os Veículos
+                        0- Retornar ao Menu Anterior
+                        99- Encerrar imediatamente
+                    
+                    """;
+            System.out.println(menu);
 
+            try {
+                int option = Integer.parseInt(input.nextLine());
+                switch (option) {
+                    case 0:
+                        return;
+                    case 1:
+                        searchDB.Manufacturers();
+                        return;
+                    case 2:
+                        searchDB.listByType(Car.class);
+                        return;
+                    case 3:
+                        searchDB.listByType(Truck.class);
+                        return;
+                    case 4:
+                        searchDB.listByType(Motorcycle.class);
+                        return;
+                    case 5:
+                        searchDB.allVehicle();
+                        return;
+                    case 99:
+                        System.exit(0);
+                    default:
+                        System.out.println("Opção inválida!");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Erro: Use valores numéricos para navegar!");
+            }
+        }
+    }
 }
