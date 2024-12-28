@@ -1,6 +1,6 @@
 package edu.reis.garageDatabase;
 
-import edu.reis.garageDatabase.config.GarageDatabaseApp;
+import edu.reis.garageDatabase.app.GarageDatabaseApp;
 import edu.reis.garageDatabase.repository.ManufacturerRepository;
 import edu.reis.garageDatabase.repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +17,15 @@ public class GarageDatabaseApplication implements CommandLineRunner {
     @Autowired
     private VehicleRepository vehicleRepository;
 
+    @Autowired
+    private GarageDatabaseApp app;
+
     public static void main(String[] args) {
         SpringApplication.run(GarageDatabaseApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        GarageDatabaseApp app = new GarageDatabaseApp(manufacturerRepository, vehicleRepository);
         app.init();
     }
 }
